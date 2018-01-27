@@ -1,0 +1,24 @@
+{
+  "name": "mock-serv",
+  "version": "1.0.0",
+  "description": "a nodejs and express based mock data server",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "mock",
+    "server"
+  ],
+  "preferGlobal": true,
+  "bin": {
+    "mock-serv": "./bin/mock-serv.js --",
+    "ms": "./bin/mock-serv.js --"
+  },
+  "author": "taoeer",
+  "license": "MIT",
+  "dependencies": {
+    "commander": "^2.13.0",
+    "express": "^4.16.2",
+    "nodemon": "^1.14.11"
+  }
+}
