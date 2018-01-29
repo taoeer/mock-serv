@@ -1,62 +1,66 @@
 const path = require('path');
 const express = require('express');
-const program = require('commander');
-
-const pkg = require('./package.json');
+const bodyParser = require('body-parser');
+const program = require('./commander');
 const app = express();
 
-program
-	.version(pkg.version)
-	.option('-c, --config <config>', 'Specified the config file!')
-	.option('-p, --port <port>', 'Specified the server port!')
-	.parse(process.argv);
-	
 let config;
 let port = 8001;
 
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({ extended: false }));
+
 if (program.port) {
-	port = program.port;
+  port = program.port;
 }
 if (program.config) {
-	require(path.resolve(process.cwd(), program.config));
+  config = require(path.resolve(process.cwd(), program.config));
 } else {
-	config = require(path.resolve(process.cwd(), 'config.js'));
+  config = require(path.resolve(process.cwd(), 'config.js'));
 }
 
 const type = (obj) => {
-	return Object.prototype.toString.call(obj);
+  return Object.prototype.toString.call(obj);
 }
 
 app.use((req, res, next) => {
   req.on('end', () => {
-    console.log(`[${req.method}] ${new Date()} ${req.url} ${res.statusCode}` );
+    console.log(`[${req.method}] ${req.url} ${res.statusCode} ${new Date()}`);
   });
   next();
 });
 
 Object.keys(config).forEach(key => {
-	const keyArray = key.split(' ');
-	const method = keyArray[0].toLowerCase();
-	const link = keyArray[1];
-	if (type(config[key]) === '[object Object]') {
-		app[method](link, (req, res) => {
-			res.json(config[key]);
-		});
-	} else if (type(config[key]) === '[object Function]') {
-		app[method](link, config[key]);
-	}
+  const keyArray = key.split(' ');
+  const method = keyArray[0].toLowerCase();
+  const link = keyArray[1];
+  const dataType = type(config[key]);
+
+  if (dataType === '[object Object]') {
+    app[method](link, (req, res) => {
+      res.json(config[key]);
+    });
+  } else if (dataType === '[object Function]') {
+    app[method](link, config[key]);
+  } else {
+    app[method](link, (req, res) => {
+      res.end(String(config[key]));
+    });
+  }
 });
 
-app.use((req, res) => {
-	res.json({
-		success:true
-	});
-});
+if (program.all) {
+  app.use((req, res) => {
+    res.json({
+      success: true
+    });
+  });
+}
 
 app.listen(port, (error) => {
-	if (error) {
-		throw error;
-	}
+  if (error) {
+    throw error;
+  }
 
-	console.log(`=====> The mock server is running at ${port} ...........`);
+  console.log(`=====> The mock server is running at port ${port} ...........`);
 });
