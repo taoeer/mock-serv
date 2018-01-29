@@ -11,6 +11,9 @@ or
 
 # Optins
 -v version
+
 -c Specified the config file, default is config.js (a nodejs module)
+
 -p Specified the server port
+
 -h Show help
