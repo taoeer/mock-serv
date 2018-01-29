@@ -10,10 +10,10 @@ or
  ``ms`` or ``mock-server``
 
 # Options
--v version
+`-v` version
 
--c Specified the config file, default is config.js (a nodejs module)
+`-c` Specified the config file, default is config.js (a nodejs module)
 
--p Specified the server port
+`-p` Specified the server port
 
--h Show help
+`-h` Show help
