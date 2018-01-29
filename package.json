@@ -1,6 +1,6 @@
 {
   "name": "mock-serv",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "a nodejs and express based mock data server",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
