@@ -11,8 +11,8 @@
   ],
   "preferGlobal": true,
   "bin": {
-    "mock-serv": "./bin/mock-serv.js --",
-    "ms": "./bin/mock-serv.js --"
+    "mock-serv": "./bin/mock-serv.js",
+    "ms": "./bin/mock-serv.js"
   },
   "author": "taoeer",
   "license": "MIT",
