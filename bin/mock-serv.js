@@ -15,12 +15,13 @@ const startServer = () => {
 
   server.stderr.on('data', (data) => {
     console.error(data.toString());
+    process.exit();
   });
 }
 
 startServer();
 
-chokidar.watch('.').on('change', (path) => {
+chokidar.watch(path.resolve(process.cwd(), program.config || 'config.js')).on('change', (path) => {
   server.kill();
   console.log('File changed, restarting server ..........');
   process.nextTick(() => {
