@@ -36,7 +36,7 @@ Object.keys(config).forEach(key => {
   const link = keyArray[1];
   const dataType = type(config[key]);
 
-  if (dataType === '[object Object]') {
+  if (/^[object (Object|Array)]$/.test(dataType)) {
     app[method](link, (req, res) => {
       res.json(config[key]);
     });
