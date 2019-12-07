@@ -1,28 +1,31 @@
 {
-  "name": "mock-serv",
-  "version": "1.0.3",
-  "description": "a nodejs and express based mock data server",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+  "author": {
+    "name": "taoeer"
   },
-  "keywords": [
-    "mock",
-    "server"
-  ],
-  "publishConfig": {
-    "registry": "https://registry.npmjs.org/"
-  },
-  "preferGlobal": true,
   "bin": {
     "mock-serv": "./bin/mock-serv.js",
     "ms": "./bin/mock-serv.js"
   },
-  "author": "taoeer",
-  "license": "MIT",
   "dependencies": {
     "body-parser": "^1.18.2",
     "commander": "^2.13.0",
     "express": "^4.16.2",
+    "http-proxy": "^1.18.0",
     "nodemon": "^1.14.11"
-  }
+  },
+  "description": "a nodejs and express based mock data server",
+  "keywords": [
+    "mock",
+    "server"
+  ],
+  "license": "MIT",
+  "name": "mock-serv",
+  "preferGlobal": true,
+  "publishConfig": {
+    "registry": "http://registry.npmjs.org/"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "version": "1.1.0"
 }
