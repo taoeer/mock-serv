@@ -16,4 +16,6 @@ or
 
 `-p` Specified the server port
 
+`-t` proxy 404 to url
+
 `-h` Show help
