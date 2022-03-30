@@ -24,6 +24,13 @@ const type = obj => {
   return Object.prototype.toString.call(obj);
 };
 
+app.use('*', (req, res, next) => {
+  res.append('Access-Control-Allow-Origin', req.get('origin'));
+  res.append('Access-Control-Allow-Credentials', true)
+  res.append('Access-Control-Allow-Headers', 'x-token,content-type')
+  next();
+});
+
 app.use((req, res, next) => {
   req.on("end", () => {
     console.log(`[${req.method}] ${req.url} ${res.statusCode} ${new Date()}`);
